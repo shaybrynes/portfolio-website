@@ -1,0 +1,8 @@
+
+webserver:
+  secret_key: $WEBSERVER_SECRET_KEY|2cf6b3b315ea45e1988ac4d37c212538
+  debug: $DEBUG_STATE|true
+  cors_headers: "Content-Type"
+
+  host: $WEBSERVER_HOST|0.0.0.0
+  port: $WEBSERVER_PORT|4000
