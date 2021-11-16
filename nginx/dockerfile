@@ -1,0 +1,5 @@
+FROM jonasal/nginx-certbot:latest
+RUN rm /etc/nginx/nginx.conf
+COPY ./conf.d/* /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/
+COPY ./templates /etc/nginx/templates/
