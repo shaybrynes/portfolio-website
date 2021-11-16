@@ -3,5 +3,5 @@ RUN mkdir /usr/src/app/
 COPY . /usr/src/app/
 WORKDIR /usr/src/app/
 RUN apt-get update && apt-get install -y libpq-dev python3-dev gcc
-RUN pip install -r requirements.txt
+RUN pip install -r requirements
 CMD ["gunicorn", "contents.server:app", "-c", "python:contents.wsgi_config"]
