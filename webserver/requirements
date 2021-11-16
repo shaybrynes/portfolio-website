@@ -11,5 +11,4 @@ PyYAML==5.4.1
 six==1.16.0
 Werkzeug==2.0.0
 envyaml==1.8.210417
-gunicorn
-setproctitle
+gunicorn==20.1.0
