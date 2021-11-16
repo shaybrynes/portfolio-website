@@ -1,6 +1,6 @@
 import flask
 
-from config import Config
+from contents.config import Config
 
 from flask_cors import CORS
 
