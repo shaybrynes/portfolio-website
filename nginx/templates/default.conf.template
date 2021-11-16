@@ -1,13 +1,13 @@
 upstream webserver {
-    server ${SERVER_HOSTNAME}:${SERVER_PORT};
+    server ${WEBSERVER_HOST}:${WEBSERVER_PORT};
 }
 
 server {
    listen 443 default_server ssl http2;
-   server_name shaybrynes.co.uk;
+   server_name ${DOMAIN};
 
-   ssl_certificate /etc/letsencrypt/live/shaybrynes.co.uk/fullchain.pem;
-   ssl_certificate_key /etc/letsencrypt/live/shaybrynes.co.uk/privkey.pem;
+   ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+   ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
 
    ssl_protocols TLSv1.2 TLSv1.3;
    ssl_prefer_server_ciphers on;
@@ -16,14 +16,5 @@ server {
    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
    # Configure NGINX to reverse proxy HTTP requests to the upstream server
-
-   # Index URL
-   location /home {
-       proxy_pass http://webserver/;
-
-       # Redefine the header fields that NGINX sends to the upstream server
-       proxy_set_header Host $host;
-       proxy_set_header X-Real-IP $remote_addr;
-       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-   }
+   include /etc/nginx/locations/*.conf;
 }

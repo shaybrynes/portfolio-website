@@ -3,7 +3,7 @@ server {
     # to HTTPS instead.
     listen 80;
     listen [::]:80;
-    server_name shaybrynes.co.uk;
+    server_name ${DOMAIN};
 
     # Pass this particular URL off to the certbot server so it can properly
     # respond to the Let's Encrypt ACME challenges for the HTTPS certificates.

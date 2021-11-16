@@ -1,6 +1,7 @@
-FROM jonasal/nginx-certbot:latest
+FROM nginx:1.21.3
 RUN rm /etc/nginx/nginx.conf
 COPY ./conf.d/* /etc/nginx/conf.d/
 COPY nginx.conf /etc/nginx/
 COPY ./templates /etc/nginx/templates/
+COPY ./templates/default.conf.template-dev /etc/nginx/templates/default.conf.template
 COPY ./locations /etc/nginx/locations/

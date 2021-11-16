@@ -1,0 +1,11 @@
+upstream webserver {
+    server ${WEBSERVER_HOST}:${WEBSERVER_PORT};
+}
+
+server {
+   listen 80 default_server;
+   server_name ${DOMAIN};
+
+   # Configure NGINX to reverse proxy HTTP requests to the upstream server
+   include /etc/nginx/locations/*.conf;
+}
