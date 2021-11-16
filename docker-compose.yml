@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  webserver:
+    container_name: $WEBSERVER_HOSTNAME
+    build:
+      context: ./webserver
+    expose:
+      - $WEBSERVER_PORT
+    environment:
+      WEBSERVER_SECRET_KEY: $WEBSERVER_SECRET_KEY
+      WEBSERVER_HOST: $WEBSERVER_HOST
+      WEBSERVER_PORT: $WEBSERVER_PORT
+      DEBUG_STATE: $DEBUG_STATE
+
+  nginx-server:
+    container_name: $NGINX_SERVER_HOSTNAME
+    build:
+      context: ./nginx
+      dockerfile: dockerfile$NGINX_DOCKERFILE
+    volumes:
+      - ./nginx/nginxsecrets:/etc/letsencrypt
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      WEBSERVER_HOST: $WEBSERVER_HOSTNAME
+      WEBSERVER_PORT: $WEBSERVER_PORT
+      CERTBOT_EMAIL: $CERTBOT_EMAIL
+      STAGING: $CERTBOT_STAGING
+      DOMAIN: $DOMAIN
+    depends_on:
+      - "webserver"
